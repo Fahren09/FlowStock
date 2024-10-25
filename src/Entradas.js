@@ -23,7 +23,7 @@ function Entrada() {
 
   return (
     <div>
-      <h5>Registrar nueva entrada</h5>
+      <h5 style={{ color: '#C6F8CF' }} >Registrar nueva entrada</h5>
       <Form className="d-flex mb-3">
         <Form.Control
           type="text"
@@ -48,6 +48,7 @@ function Entrada() {
         <Button variant="dark" onClick={handleAgregar}>
           <FaPlus className="me-2" />Agregar
         </Button>
+        
       </Form>
 
       <ListGroup>
@@ -58,9 +59,12 @@ function Entrada() {
               <small>Fecha: {entrada.fecha}</small>
             </div>
             <div>
-              <span className="me-3">Cantidad: {entrada.cantidad}</span>
+            <span className="me-3">Cantidad: {entrada.cantidad}</span>
               <Button variant="outline-secondary" size="sm">
                 Editar
+              </Button>
+              <Button variant="outline-secondary" size="sm" className="ms-2">
+                Eliminar
               </Button>
             </div>
           </ListGroup.Item>

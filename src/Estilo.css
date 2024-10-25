@@ -1,0 +1,18 @@
+/* Clase para el textbox */
+.search-input {
+    border: none; /* Elimina todos los bordes */
+    border-bottom: 3px solid #0F8D89; /* Solo el borde inferior */
+    outline: none; /* Elimina el outline al enfocar */
+    padding: 0.5rem 0; /* Padding vertical para un mejor espaciado */
+  }
+
+/* Cambiar color del placeholder */
+.search-input::placeholder {
+    color: #0F8D89; /* Cambia el color del placeholder */
+    opacity: 1; /* Asegúrate de que el placeholder no sea transparente */
+  }
+  
+  .custom-tab-border {
+    border-bottom: 4px solid #C6F8CF; /* Cambia el grosor del borde aquí */
+  }
+  
