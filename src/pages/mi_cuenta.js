@@ -10,9 +10,10 @@ const MiCuenta = () => {
   const [userData, setUserData] = useState({
     nombre: 'Juan Pérez',
     email: 'juanperez@example.com',
-    tipo: 'Almacenista',
+    tipo: 'Empleado', // Valor inicial del rol
     imagenPerfil: 'https://via.placeholder.com/150',
   });
+  
   const [editMode, setEditMode] = useState(false);
   const [formData, setFormData] = useState(userData);
   const [imagenTemporal, setImagenTemporal] = useState(userData.imagenPerfil);

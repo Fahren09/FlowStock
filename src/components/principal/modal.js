@@ -18,14 +18,29 @@ function ModalEdicion({
         <Form>
           {campos.map((campo) => (
             <Form.Group key={campo.id} controlId={`form${campo.id}`}>
-              <Form.Label>{campo.etiqueta}</Form.Label>
-              <Form.Control
-                type={campo.tipo}
-                value={campo.valor}
-                onChange={(e) => campo.enCambio(e.target.value)}
-                style={{ backgroundColor: '#2D4076', borderColor: '#C6F8CF', color: '#C6F8CF' }} 
-                className="me-2-principal"
-              />
+              <Form.Label>{campo.label}</Form.Label>
+              {campo.tipo === 'select' ? (
+                <Form.Select
+                  value={campo.valor}
+                  onChange={(e) => campo.enCambio(e.target.value)}
+                  style={{ backgroundColor: '#2D4076', borderColor: '#C6F8CF', color: '#C6F8CF' }}
+                  className="me-2-principal"
+                >
+                  {campo.opciones.map((opcion, index) => (
+                    <option key={index} value={opcion.value}>
+                      {opcion.label}
+                    </option>
+                  ))}
+                </Form.Select>
+              ) : (
+                <Form.Control
+                  type={campo.tipo} // Esto permitirá 'text', 'number', 'date', etc.
+                  value={campo.valor}
+                  onChange={(e) => campo.enCambio(e.target.value)}
+                  style={{ backgroundColor: '#2D4076', borderColor: '#C6F8CF', color: '#C6F8CF' }}
+                  className="me-2-principal"
+                />
+              )}
             </Form.Group>
           ))}
         </Form>

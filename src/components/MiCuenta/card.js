@@ -11,7 +11,7 @@ const UserProfileCard = ({
   onImageChange,
   onEdit,
   onSave,
-  userRole
+  userRole,
 }) => (
   <Card className="p-4" style={{ backgroundColor: '#2D4076', color: '#0F8D89' }}>
     <Row>
@@ -26,10 +26,38 @@ const UserProfileCard = ({
       </Col>
       <Col xs={12} md={8}>
         <Form>
-          <FormGroup label="Nombre" name="nombre" value={formData.nombre} onChange={onFormChange} editMode={editMode} />
-          <FormGroup label="Correo Electrónico" name="email" value={formData.email} onChange={onFormChange} editMode={editMode} />
-          <FormGroup label="Rol" value={userRole} editMode={false} />
-          {editMode && <FormGroup label="Contraseña" type="password" placeholder="Nueva contraseña" />}
+          <FormGroup
+            label="Nombre"
+            name="nombre"
+            value={formData.nombre}
+            onChange={onFormChange}
+            editMode={editMode}
+          />
+          <FormGroup
+            label="Correo Electrónico"
+            name="email"
+            value={formData.email}
+            onChange={onFormChange}
+            editMode={editMode}
+          />
+          <FormGroup
+            label="Rol"
+            name="tipo"
+            value={formData.tipo}
+            onChange={onFormChange}
+            editMode={editMode}
+            opciones={['Empleado', 'Administrador']}
+          />
+          {editMode && (
+            <FormGroup
+              label="Contraseña"
+              name="password"
+              type="password"
+              placeholder="Nueva contraseña"
+              onChange={onFormChange}
+              editMode={editMode}
+            />
+          )}
           <div className="d-flex justify-content-end">
             {!editMode ? (
               <Button variant="primary" onClick={onEdit} style={{ backgroundColor: '#C6F8CF', color: '#232D47', border: 'none' }}>

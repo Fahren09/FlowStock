@@ -52,22 +52,22 @@ function Reportes() {
     <div>
       <h5 style={{ color: '#C6F8CF' }}>Registrar Reporte</h5>
       <Forms
-        fields={[
+        campos={[
           { 
             id: 'fecha', 
-            type: 'date', 
+            tipo: 'date', 
             placeholder: 'Fecha del Reporte', 
-            value: fecha, 
-            onChange: setFecha 
+            valor: fecha, 
+            enCambio: setFecha 
           },
         ]}
-        handleSubmit={handleSave}
+        manejarEnvio={handleSave}
       />
       <List
         items={reportes}
-        handleEdit={handleEdit}
-        handleDelete={handleDelete}
-        renderItem={(item) => (
+        manejarEdicion={handleEdit}
+        manejarEliminacion={handleDelete}
+        renderizarItem={(item) => (
           <div>
             <strong>Fecha:</strong> {item.fecha}
           </div>
@@ -76,20 +76,20 @@ function Reportes() {
 
       {/* Modal de Edición */}
       <EditModal
-        show={modalShow}
-        resetForm={resetForm}
-        fields={[
+        mostrar={modalShow}
+        reiniciarFormulario={resetForm}
+        campos={[
           { 
             id: 'fecha', 
             label: 'Fecha del Reporte', 
-            type: 'date', 
-            value: fecha, 
-            onChange: (val) => setFecha(val) 
+            tipo: 'date', 
+            valor: fecha, 
+            enCambio: (val) => setFecha(val) 
           },
         ]}
-        handleSave={handleSave}
-        modalTitle="Editar Reporte"
-        saveButtonText="Actualizar"
+        manejarGuardar={handleSave}
+        tituloModal="Editar Reporte"
+        textoBotonGuardar="Actualizar"
       />
     </div>
   );

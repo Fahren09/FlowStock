@@ -43,37 +43,38 @@ function Entradas() {
   return (
     <div>
       <h5 style={{ color: '#C6F8CF' }}>Registrar nueva entrada</h5>
+     
       <Forms 
-        fields={[
-          { id: 'producto', type: 'text', placeholder: 'Producto', value: updatedFields.producto, onChange: (val) => setUpdatedFields({ ...updatedFields, producto: val }) },
-          { id: 'cantidad', type: 'number', placeholder: 'Cantidad', value: updatedFields.cantidad, onChange: (val) => setUpdatedFields({ ...updatedFields, cantidad: val }) },
-          { id: 'pedido', type: 'text', placeholder: 'Pedido', value: updatedFields.pedido, onChange: (val) => setUpdatedFields({ ...updatedFields, pedido: val }) },
+        campos={[
+          { id: 'producto', tipo: 'text', placeholder: 'Producto', valor: updatedFields.producto, enCambio: (val) => setUpdatedFields({ ...updatedFields, producto: val }) },
+          { id: 'cantidad', tipo: 'number', placeholder: 'Cantidad', valor: updatedFields.cantidad, enCambio: (val) => setUpdatedFields({ ...updatedFields, cantidad: val }) },
+          { id: 'pedido', tipo: 'text', placeholder: 'Pedido', valor: updatedFields.pedido, enCambio: (val) => setUpdatedFields({ ...updatedFields, pedido: val }) },
         ]}
-        handleSubmit={handleSubmit}  // Aquí pasamos la función handleSubmit
-        searchEnabled={true}
+        manejarEnvio={handleSubmit}  // Aquí pasamos la función handleSubmit
+        busquedaHabilitada={true}
       />
-      <List
+      <List 
         items={entradas}
-        handleEdit={handleEdit}
-        handleDelete={handleDelete}
-        renderItem={(item) => (
+        manejarEdicion={handleEdit}
+        manejarEliminacion={handleDelete}
+        renderizarItem={(item) => (
           <>
             <strong>{item.producto}</strong> <br />
-            <small>Fecha: {item.fecha}</small>
+            <small>Fecha: {item.fecha}</small> 
           </>
         )}
       />
       <EditModal
-        show={modalShow}
-        resetForm={() => setModalShow(false)}
-        fields={[
-          { id: 'producto', label: 'Producto', type: 'text', value: updatedFields.producto, onChange: (val) => setUpdatedFields({ ...updatedFields, producto: val }) },
-          { id: 'cantidad', label: 'Cantidad', type: 'number', value: updatedFields.cantidad, onChange: (val) => setUpdatedFields({ ...updatedFields, cantidad: val }) },
-          { id: 'pedido', label: 'Pedido', type: 'text', value: updatedFields.pedido, onChange: (val) => setUpdatedFields({ ...updatedFields, pedido: val }) },
+        mostrar={modalShow}
+        reiniciarFormulario={() => setModalShow(false)}
+        campos={[
+          { id: 'producto', label: 'Producto', tipo: 'text', valor: updatedFields.producto, enCambio: (val) => setUpdatedFields({ ...updatedFields, producto: val }) },
+          { id: 'cantidad', label: 'Cantidad', tipo: 'number', valor: updatedFields.cantidad, enCambio: (val) => setUpdatedFields({ ...updatedFields, cantidad: val }) },
+          { id: 'pedido', label: 'Pedido', tipo: 'text', valor: updatedFields.pedido, enCambio: (val) => setUpdatedFields({ ...updatedFields, pedido: val }) },
         ]}
-        handleSave={handleSave}
-        modalTitle="Editar Entrada"
-        saveButtonText="Actualizar"
+        manejarGuardar={handleSave}
+        tituloModal="Editar Entrada"
+        textoBotonGuardar="Actualizar"
       />
     </div>
   );

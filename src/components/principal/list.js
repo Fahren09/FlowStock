@@ -2,7 +2,10 @@ import React from 'react';
 import { ListGroup, Button } from 'react-bootstrap';
 import { FaEdit, FaTrash } from 'react-icons/fa';
 
-function Lista({ items, manejarEdicion, manejarEliminacion, renderizarItem }) {
+function Lista({ items, 
+  manejarEdicion, 
+  manejarEliminacion, 
+  renderizarItem }) {
   return (
     <ListGroup className="mt-3">
       {items.map((item, index) => (

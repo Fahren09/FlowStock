@@ -13,6 +13,17 @@ function Pedidos() {
   const [modalShow, setModalShow] = useState(false);
   const [updatedFields, setUpdatedFields] = useState({ tipo: '', empresa: '', fechaLlegada: '', estado: '' });
   const empresas = ['Empresa A', 'Empresa B', 'Empresa C', 'Empresa D'];
+
+  const empresasOpciones = empresas.map((empresa) => ({
+    label: empresa,
+    value: empresa,
+  })); 
+
+  const tiposOpciones = ['Envio', 'Llegada'].map((tipo) => ({
+    label: tipo,
+    value: tipo,
+  }));
+  
  
   const handleEdit = (index) => {
     setSelectedIndex(index);
@@ -46,19 +57,19 @@ function Pedidos() {
     <div>
       <h5 style={{ color: '#C6F8CF' }}>Registrar nuevo pedido</h5>
       <Forms 
-        fields={[
-          { id: 'tipo', type: 'select', placeholder: 'Tipo', value: updatedFields.tipo, onChange: (val) => setUpdatedFields({ ...updatedFields, tipo: val }), options: ['Envio', 'Llegada'] },
-          { id: 'empresa', type: 'select', placeholder: 'Empresa', value: updatedFields.empresa, onChange: (val) => setUpdatedFields({ ...updatedFields, empresa: val }), options: empresas },
-          { id: 'fechaLlegada', type: 'date', placeholder: 'Fecha de Llegada', value: updatedFields.fechaLlegada, onChange: (val) => setUpdatedFields({ ...updatedFields, fechaLlegada: val }) },
+        campos={[
+          { id: 'tipo', tipo: 'select', placeholder: 'Tipo', valor: updatedFields.tipo, enCambio: (val) => setUpdatedFields({ ...updatedFields, tipo: val }), opciones: ['Envio', 'Llegada'] },
+          { id: 'empresa', tipo: 'select', placeholder: 'Empresa', valor: updatedFields.empresa, enCambio: (val) => setUpdatedFields({ ...updatedFields, empresa: val }), opciones: empresas },
+          { id: 'fechaLlegada', tipo: 'date', placeholder: 'Fecha de Llegada', valor: updatedFields.fechaLlegada, enCambio: (val) => setUpdatedFields({ ...updatedFields, fechaLlegada: val }) },
         ]}
-        handleSubmit={handleSubmit}
-        searchEnabled={true}
+        manejarEnvio={handleSubmit}
+        busquedaHabilitada={true}
       />
       <List
         items={pedidos}
-        handleEdit={handleEdit}
-        handleDelete={handleDelete}
-        renderItem={(item) => (
+        manejarEdicion={handleEdit}
+        manejarEliminacion={handleDelete}
+        renderizarItem={(item) => (
           <>
             <strong>{item.tipo}</strong> <br />
             <small>Empresa: {item.empresa}</small> <br />
@@ -69,16 +80,16 @@ function Pedidos() {
         )}
       />
       <EditModal
-        show={modalShow}
-        resetForm={() => setModalShow(false)}
-        fields={[
-          { id: 'tipo', label: 'Tipo', type: 'select', value: updatedFields.tipo, onChange: (val) => setUpdatedFields({ ...updatedFields, tipo: val }), options: ['Envio', 'Llegada'] },
-          { id: 'empresa', label: 'Empresa', type: 'select', value: updatedFields.empresa, onChange: (val) => setUpdatedFields({ ...updatedFields, empresa: val }), options: empresas },
-          { id: 'fechaLlegada', label: 'Fecha de Llegada', type: 'date', value: updatedFields.fechaLlegada, onChange: (val) => setUpdatedFields({ ...updatedFields, fechaLlegada: val }) },
+        mostrar={modalShow}
+        reiniciarFormulario={() => setModalShow(false)}
+        campos={[
+          { id: 'tipo', label: 'Tipo', tipo: 'select', valor: updatedFields.tipo, enCambio: (val) => setUpdatedFields({ ...updatedFields, tipo: val }), opciones: tiposOpciones },
+          { id: 'empresa', label: 'Empresa', tipo: 'select', valor: updatedFields.empresa, enCambio: (val) => setUpdatedFields({ ...updatedFields, empresa: val }), opciones: empresasOpciones },
+          { id: 'fechaLlegada', label: 'Fecha de Llegada', tipo: 'date', valor: updatedFields.fechaLlegada, enCambio: (val) => setUpdatedFields({ ...updatedFields, fechaLlegada: val }) },
         ]}
-        handleSave={handleSave}
-        modalTitle="Editar Pedido"
-        saveButtonText="Actualizar"
+        manejarGuardar={handleSave}
+        tituloModal="Editar Pedido"
+        textoBotonGuardar="Actualizar"
       />
     </div>
   );

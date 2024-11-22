@@ -36,6 +36,10 @@ function Productos() {
   });
 
   const categorias = ['Electrónica', 'Muebles', 'Ropa', 'Juguetes', 'Alimentos'];
+  const categoriasOpciones = categorias.map((categoria) => ({
+    label: categoria,
+    value: categoria,
+  }));
 
   const handleEdit = (index) => {
     setSelectedIndex(index);
@@ -76,27 +80,27 @@ function Productos() {
     <div>
       <h5 style={{ color: '#C6F8CF' }}>Registrar nuevo producto</h5>
       <Forms
-        fields={[
-          { id: 'nombre', type: 'text', placeholder: 'Nombre del producto', value: updatedFields.nombre, onChange: (val) => setUpdatedFields({ ...updatedFields, nombre: val }) },
-          { id: 'descripcion', type: 'textarea', placeholder: 'Descripción del producto', value: updatedFields.descripcion, onChange: (val) => setUpdatedFields({ ...updatedFields, descripcion: val }) },
-          { id: 'stock', type: 'number', placeholder: 'Cantidad en stock', value: updatedFields.stock, onChange: (val) => setUpdatedFields({ ...updatedFields, stock: val }) },
+        campos={[
+          { id: 'nombre', tipo: 'text', placeholder: 'Nombre del producto', valor: updatedFields.nombre, enCambio: (val) => setUpdatedFields({ ...updatedFields, nombre: val }) },
+          { id: 'descripcion', tipo: 'textarea', placeholder: 'Descripción del producto', valor: updatedFields.descripcion, enCambio: (val) => setUpdatedFields({ ...updatedFields, descripcion: val }) },
+          { id: 'stock', tipo: 'number', placeholder: 'Cantidad en stock', valor: updatedFields.stock, enCambio: (val) => setUpdatedFields({ ...updatedFields, stock: val }) },
           {
             id: 'categoria',
-            type: 'select',
+            tipo: 'select',
             placeholder: 'Categoría',
-            options: categorias,
-            value: updatedFields.categoria,
-            onChange: (val) => setUpdatedFields({ ...updatedFields, categoria: val }),
+            opciones: categorias,
+            valor: updatedFields.categoria,
+            enCambio: (val) => setUpdatedFields({ ...updatedFields, categoria: val }),
           },
         ]}
-        handleSubmit={handleSubmit}
-        searchEnabled={true}
+        manejarEnvio={handleSubmit}
+        busquedaHabilitada={true}
       />
       <List
         items={productos}
-        handleEdit={handleEdit}
-        handleDelete={handleDelete}
-        renderItem={(item) => (
+        manejarEdicion={handleEdit}
+        manejarEliminacion={handleDelete}
+        renderizarItem={(item) => (
           <>
             <strong>{item.nombre}</strong> <br />
             <small>Descripción: {item.descripcion}</small> <br />
@@ -108,24 +112,24 @@ function Productos() {
         )}
       />
       <EditModal
-        show={modalShow}
-        resetForm={() => setModalShow(false)}
-        fields={[
-          { id: 'nombre', label: 'Nombre', type: 'text', value: updatedFields.nombre, onChange: (val) => setUpdatedFields({ ...updatedFields, nombre: val }) },
-          { id: 'descripcion', label: 'Descripción', type: 'textarea', value: updatedFields.descripcion, onChange: (val) => setUpdatedFields({ ...updatedFields, descripcion: val }) },
-          { id: 'stock', label: 'Stock', type: 'number', value: updatedFields.stock, onChange: (val) => setUpdatedFields({ ...updatedFields, stock: val }) },
+        mostrar={modalShow}
+        reiniciarFormulario={() => setModalShow(false)}
+        campos={[
+          { id: 'nombre', label: 'Nombre', tipo: 'text', valor: updatedFields.nombre, enCambio: (val) => setUpdatedFields({ ...updatedFields, nombre: val }) },
+          { id: 'descripcion', label: 'Descripción', tipo: 'textarea', valor: updatedFields.descripcion, enCambio: (val) => setUpdatedFields({ ...updatedFields, descripcion: val }) },
+          { id: 'stock', label: 'Stock', tipo: 'number', valor: updatedFields.stock, enCambio: (val) => setUpdatedFields({ ...updatedFields, stock: val }) },
           {
             id: 'categoria',
             label: 'Categoría',
-            type: 'select',
-            options: categorias,
-            value: updatedFields.categoria,
-            onChange: (val) => setUpdatedFields({ ...updatedFields, categoria: val }),
+            tipo: 'select',
+            opciones: categoriasOpciones,
+            valor: updatedFields.categoria,
+            enCambio: (val) => setUpdatedFields({ ...updatedFields, categoria: val }),
           },
         ]}
-        handleSave={handleSave}
-        modalTitle="Editar Producto"
-        saveButtonText="Actualizar"
+        manejarGuardar={handleSave}
+        tituloModal="Editar Producto"
+        textoBotonGuardar="Actualizar"
       />
     </div>
   );
